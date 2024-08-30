@@ -10,12 +10,8 @@ const createRandomShortLinkId = (maxLength = 6) => {
         const randomIndex = Math.floor(Math.random() * createRandomWords.length);
         randomWord += createRandomWords[randomIndex];
     }
-    console.log(randomWord)
     return randomWord
 };
-
-
-
 
 UrlRouter.get("/", async (req, res, next) => {
     try {
@@ -26,6 +22,21 @@ UrlRouter.get("/", async (req, res, next) => {
         next(error);
     }
 });
+
+UrlRouter.get("/my-shot-link/:id", async (req, res, next) => {
+    const id = req.params.id;
+    try {
+        const url = await Url.findOne({_id:id});
+        if (!url) {
+            return res.status(404).json({ error: 'URL not found' });
+        }
+        return res.status(200).send(url);
+    } catch (error) {
+        console.error('Error finding URLs:', error);
+        next(error);
+    }
+});
+
 
 UrlRouter.post("/", async (req, res) => {
     let shortLink = '';
@@ -39,7 +50,6 @@ UrlRouter.post("/", async (req, res) => {
                 onlyShortId = true;
             }
         }
-        console.log("it is checking",shortLink)
         return shortLink;
     }
 

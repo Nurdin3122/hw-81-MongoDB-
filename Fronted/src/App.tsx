@@ -3,11 +3,9 @@ import Home from "./Components/Home/Home.tsx";
 
 const App = () => {
 
-
   return (
     <>
         <Home/>
-
     </>
   )
 };

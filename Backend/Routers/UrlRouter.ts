@@ -23,14 +23,15 @@ UrlRouter.get("/", async (req, res, next) => {
     }
 });
 
-UrlRouter.get("/my-shot-link/:id", async (req, res, next) => {
+UrlRouter.get("/my-short-link/:id", async (req, res, next) => {
     const id = req.params.id;
     try {
         const url = await Url.findOne({_id:id});
         if (!url) {
             return res.status(404).json({ error: 'URL not found' });
         }
-        return res.status(200).send(url);
+
+        return res.status(301).redirect(url.link);
     } catch (error) {
         console.error('Error finding URLs:', error);
         next(error);

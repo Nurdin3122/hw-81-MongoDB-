@@ -1,9 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit';
+import {LinksReducer} from "../Components/Home/LinksSLice.ts";
 
 
 export const store = configureStore({
     reducer: {
-
+        links:LinksReducer,
     }
 });
 

@@ -5,7 +5,11 @@ const UrlSchema = new Schema({
     link: {
         type: String,
         required: true,
-    }
+    },
+    shortLink: {
+        type: String,
+        required:true,
+    },
 });
 
 const Url = mongoose.model('Url', UrlSchema);
